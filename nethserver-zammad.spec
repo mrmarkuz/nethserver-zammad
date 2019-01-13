@@ -7,7 +7,7 @@ URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
 BuildArch: noarch
 
-Requires: nethserver-nginx, java-1.8.0, elasticsearch, zammad
+Requires: nethserver-nginx, java-1.8.0-openjdk, elasticsearch, zammad
 
 BuildRequires: perl
 BuildRequires: nethserver-devtools 
