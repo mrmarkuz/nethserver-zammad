@@ -1,6 +1,6 @@
 <VirtualHost *:80>
-    ServerName myserver.domain.local
-    Redirect permanent / https://myserver.domain.local
+    ServerName { $zammad{VirtualHost} }
+    Redirect permanent / https://{ $zammad{VirtualHost} }
 </VirtualHost>
 
 <VirtualHost *:443>

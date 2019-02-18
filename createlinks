@@ -38,5 +38,6 @@ event_services($event,
     'nginx' => 'restart',
     'httpd' => 'reload',
     'zammad' => 'restart',
-    'elasticsearch' => 'restart'
+    'elasticsearch' => 'restart',
+    'postgresql' => 'restart'
 );
