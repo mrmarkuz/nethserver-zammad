@@ -10,7 +10,7 @@
 su - postgres -c "psql -lqt | cut -d \| -f 1 | grep -q -w zammad"
 if [ $? -eq 1 ]; then
 
-   su - postgres -c "UPDATE pg_database SET encoding = pg_char_to_encoding('UTF8') WHERE datname = 'template1';\""
+   su - postgres -c "psql -c \"UPDATE pg_database SET encoding = pg_char_to_encoding('UTF8') WHERE datname = 'template1';\""
 
 #su - postgres -c "psql -c \"update pg_database set datallowconn = TRUE where datname = 'template0';\""
 #su - postgres -c "psql template0 -c \"update pg_database set datistemplate = FALSE where datname = 'template1';\""
@@ -23,5 +23,5 @@ fi
 
 su - postgres -c "psql -lqt | cut -d \| -f 1 | grep -q -w zammad"
 if [ $? -eq 0 ]; then
-   su - postgres -c "UPDATE pg_database SET encoding = pg_char_to_encoding('SQL_ASCII') WHERE datname = 'template1';\""
+   su - postgres -c "psql -c \"UPDATE pg_database SET encoding = pg_char_to_encoding('SQL_ASCII') WHERE datname = 'template1';\""
 fi
