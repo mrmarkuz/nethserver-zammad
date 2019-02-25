@@ -40,7 +40,7 @@ event_templates($event,
 );
 event_services($event, 
     'nginx' => 'restart',
-    'httpd' => 'reload',
+    'httpd' => 'restart',
     'zammad' => 'restart',
     'elasticsearch' => 'restart',
     'postgresql' => 'restart'
