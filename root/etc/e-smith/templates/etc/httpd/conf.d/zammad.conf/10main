@@ -1,6 +1,10 @@
 <VirtualHost *:80>
+    IncludeOptional conf.d/default-virtualhost.inc
+</VirtualHost>
+
+<VirtualHost *:80>
     ServerName { $zammad{VirtualHost} || 'zammad.'.$DomainName }
-    Redirect permanent / https://{ $zammad{VirtualHost} || 'zammad.'.$DomainName }
+    RedirectMatch 301 ^(?!/\.well-known/acme-challenge/).* https://{ $zammad{VirtualHost} || 'zammad.'.$DomainName }
 </VirtualHost>
 
 <VirtualHost *:443>
