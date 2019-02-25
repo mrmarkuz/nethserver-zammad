@@ -1,27 +1,25 @@
 #!/bin/bash
 
-# rename zammad nginx conf if exists
-[ -f "/etc/nginx/conf.d/zammad.conf" ] || mv /etc/nginx/conf.d/zammad.conf /etc/nginx/conf.d/zammad.disabled
+# rename zammad nginx conf if exists - disabled - templated
+#[ -f "/etc/nginx/conf.d/zammad.conf" ] && mv /etc/nginx/conf.d/zammad.conf /etc/nginx/conf.d/zammad.disabled
+
 # not needed, done by RPM
 #yes | /usr/share/elasticsearch/bin/elasticsearch-plugin -s install ingest-attachment
 
-# prepare postgres
+# prepare postgres set postgres template1 to UTF8 for zammad rpm to work if database zammad does not exist
 
 su - postgres -c "psql -lqt | cut -d \| -f 1 | grep -q -w zammad"
 if [ $? -eq 1 ]; then
-
    su - postgres -c "psql -c \"UPDATE pg_database SET encoding = pg_char_to_encoding('UTF8') WHERE datname = 'template1';\""
-
-#su - postgres -c "psql -c \"update pg_database set datallowconn = TRUE where datname = 'template0';\""
-#su - postgres -c "psql template0 -c \"update pg_database set datistemplate = FALSE where datname = 'template1';\""
-#su - postgres -c "psql -c \"drop database template1;\""
-#su - postgres -c "psql -c \"create database template1 with template = template0 encoding = 'UTF8';\""
-#su - postgres -c "psql -c \"update pg_database set datistemplate = TRUE where datname = 'template1';\""
-#su - postgres -c "psql template1 -c \"update pg_database set datallowconn = FALSE where datname = 'template0';;\""
-
 fi
+
+# reset postgres template1 if database zammad exists to not make problems with other apps
 
 su - postgres -c "psql -lqt | cut -d \| -f 1 | grep -q -w zammad"
 if [ $? -eq 0 ]; then
    su - postgres -c "psql -c \"UPDATE pg_database SET encoding = pg_char_to_encoding('SQL_ASCII') WHERE datname = 'template1';\""
 fi
+
+# if zammad already installed let it use port 3001 instead of 3000 to not use same port as ntopng
+
+[ -f "/usr/bin/zammad" ] && zammad config:set ZAMMAD_RAILS_PORT=3001

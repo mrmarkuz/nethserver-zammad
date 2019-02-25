@@ -1,6 +1,6 @@
 <VirtualHost *:80>
-    ServerName { $zammad{VirtualHost} }
-    Redirect permanent / https://{ $zammad{VirtualHost} }
+    ServerName { $zammad{VirtualHost} || 'zammad.'.$DomainName }
+    Redirect permanent / https://{ $zammad{VirtualHost} || 'zammad.'.$DomainName }
 </VirtualHost>
 
 <VirtualHost *:443>
@@ -14,7 +14,7 @@
 #    SSLOpenSSLConfCmd DHParameters /etc/ssl/dhparam.pem
 
     # replace 'localhost' with your fqdn if you want to use zammad from remote
-    ServerName myserver.domain.local
+    ServerName { $zammad{VirtualHost} || 'zammad.'.$DomainName }
 
     ## don't loose time with IP address lookups
     HostnameLookups Off
@@ -28,7 +28,7 @@
     ProxyRequests Off
     ProxyPreserveHost On
 
-    <Proxy 127.0.0.1:3000>
+    <Proxy 127.0.0.1:3001>
       Require local
     </Proxy>
 
@@ -36,7 +36,7 @@
     ProxyPass /favicon.ico !
     ProxyPass /robots.txt !
     ProxyPass /ws ws://127.0.0.1:6042/
-    ProxyPass / http://127.0.0.1:3000/
+    ProxyPass / http://127.0.0.1:3001/
 
     # Use settings below if proxying does not work and you receive HTTP-Errror 404
     # if you use the settings below, make sure to comment out the above two options

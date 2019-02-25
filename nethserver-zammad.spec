@@ -36,4 +36,3 @@ rm -rf %{buildroot}
 %dir %{_nseventsdir}/%{name}-update
 
 %changelog
-

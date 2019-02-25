@@ -1,0 +1,3 @@
+#
+# empty nginx zammad.conf template to overwrite conf by zammad.rpm to ensure nginx starts correctly
+#
