@@ -20,6 +20,7 @@ NethServer Zammad integration
 
 %build
 perl createlinks
+mkdir -p root/var/lib/nethserver/zammad/backup
 
 %install
 rm -rf %{buildroot}

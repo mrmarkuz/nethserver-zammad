@@ -44,3 +44,12 @@ event_services($event,
     'elasticsearch' => 'restart',
     'postgresql' => 'restart'
 );
+
+#--------------------------------------------------
+# actions for pre-backup-data event
+#--------------------------------------------------
+
+$event = 'pre-backup-data';
+
+event_actions($event, 'nethserver-zammad-backup' => 50);
+
