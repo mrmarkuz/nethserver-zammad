@@ -1,0 +1,6 @@
+#
+# zammad cron backup script config
+#
+
+# Daily backups
+30 1 * * * root /opt/zammad/contribs/backup/zammad-backup.sh

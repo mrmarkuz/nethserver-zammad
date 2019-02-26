@@ -36,7 +36,9 @@ event_actions($event,
 event_templates($event, 
     '/etc/httpd/conf.d/zammad.conf',
     '/var/lib/pgsql/data/pg_hba.conf',
-    '/etc/nginx/conf.d/zammad.conf'
+    '/etc/nginx/conf.d/zammad.conf',
+    '/etc/cron.d/zammad',
+    '/opt/zammad/contrib/backup/config'
 );
 event_services($event, 
     'nginx' => 'restart',
@@ -54,3 +56,12 @@ $event = 'pre-backup-data';
 
 event_actions($event, 'nethserver-zammad-backup' => 50);
 
+#--------------------------------------------------
+# actions for post-restore-data event
+#--------------------------------------------------
+
+$event = 'post-restore-data';
+
+event_actions($event, 'nethserver-zammad-restore' => 50);
+
+event_services($event, 'zammad' => 'restart');
