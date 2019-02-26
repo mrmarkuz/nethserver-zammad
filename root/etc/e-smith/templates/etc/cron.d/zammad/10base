@@ -3,4 +3,4 @@
 #
 
 # Daily backups
-30 1 * * * root /opt/zammad/contrib/backup/zammad-backup.sh
+30 1 * * * root /opt/zammad/contrib/backup/zammad_backup.sh
