@@ -1,7 +1,7 @@
 Summary: NethServer zammad integration
 Name: nethserver-zammad
 Version: 1.0.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
 Source0: %{name}-%{version}.tar.gz
@@ -25,7 +25,9 @@ mkdir -p root/var/lib/nethserver/zammad/backup
 %install
 rm -rf %{buildroot}
 (cd root; find . -depth -print | cpio -dump %{buildroot})
-%{genfilelist} %{buildroot} > %{name}-%{version}-filelist
+%{genfilelist} \
+  --dir /var/lib/nethserver/zammad/backup 'attr(755, postgres, postgres)' \
+%{buildroot} > %{name}-%{version}-filelist
 
 %post
 
