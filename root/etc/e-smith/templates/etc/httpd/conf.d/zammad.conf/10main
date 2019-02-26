@@ -1,10 +1,15 @@
+{
+if (($zammad{'status'} || 'disabled') eq 'enabled'){
+my $vhost = $zammad{VirtualHost} || 'zammad.'.$DomainName;
+
+$OUT .=<<"EOF";
 <VirtualHost *:80>
     IncludeOptional conf.d/default-virtualhost.inc
 </VirtualHost>
 
 <VirtualHost *:80>
-    ServerName { $zammad{VirtualHost} || 'zammad.'.$DomainName }
-    RedirectMatch 301 ^(?!/\.well-known/acme-challenge/).* https://{ $zammad{VirtualHost} || 'zammad.'.$DomainName }
+    ServerName $vhost
+    RedirectMatch 301 ^(?!/\.well-known/acme-challenge/).* https://$vhost
 </VirtualHost>
 
 <VirtualHost *:443>
@@ -18,7 +23,7 @@
 #    SSLOpenSSLConfCmd DHParameters /etc/ssl/dhparam.pem
 
     # replace 'localhost' with your fqdn if you want to use zammad from remote
-    ServerName { $zammad{VirtualHost} || 'zammad.'.$DomainName }
+    ServerName $vhost
 
     ## don't loose time with IP address lookups
     HostnameLookups Off
@@ -60,3 +65,17 @@
               Require all granted
     </Directory>
 </VirtualHost>
+EOF
+}
+else {
+    $OUT .=<<'EOF';
+
+# Zammad is disabled
+# You can enable it with
+# config setprop zammad status enabled
+# signal-event nethserver-zammad-update
+
+EOF
+}
+
+}
