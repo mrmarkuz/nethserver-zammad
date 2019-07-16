@@ -3,8 +3,9 @@
 # rename zammad nginx conf if exists - disabled - templated
 #[ -f "/etc/nginx/conf.d/zammad.conf" ] && mv /etc/nginx/conf.d/zammad.conf /etc/nginx/conf.d/zammad.disabled
 
-# not needed, done by RPM
-#yes | /usr/share/elasticsearch/bin/elasticsearch-plugin -s install ingest-attachment
+# not needed, done by RPM - needed again to update the plugin
+/usr/share/elasticsearch/bin/elasticsearch-plugin -s remove ingest-attachment
+yes | /usr/share/elasticsearch/bin/elasticsearch-plugin -s install ingest-attachment
 
 # prepare postgres set postgres template1 to UTF8 for zammad rpm to work if database zammad does not exist
 
