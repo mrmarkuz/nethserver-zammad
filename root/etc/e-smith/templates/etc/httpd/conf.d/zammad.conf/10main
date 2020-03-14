@@ -22,6 +22,10 @@ $OUT .=<<"EOF";
 #    SSLCertificateChainFile /etc/ssl/lets-encrypt-x3-cross-signed.pem
 #    SSLOpenSSLConfCmd DHParameters /etc/ssl/dhparam.pem
 
+    # CSRF token fix - thanks to CptCharlesG
+    RequestHeader set X_FORWARDED_PROTO ‘https’
+    RequestHeader set X-Forwarded-Ssl on
+
     # replace 'localhost' with your fqdn if you want to use zammad from remote
     ServerName $vhost
 

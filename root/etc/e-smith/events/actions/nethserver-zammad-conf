@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# for elasticsearch update
+systemctl daemon-reload
+
 # rename zammad nginx conf if exists - disabled - templated
 #[ -f "/etc/nginx/conf.d/zammad.conf" ] && mv /etc/nginx/conf.d/zammad.conf /etc/nginx/conf.d/zammad.disabled
 
