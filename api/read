@@ -21,9 +21,12 @@
 
 input=$(cat)
 action=$(jq -r .action <<<"$input")
-protocol=$(jq -r .location.protocol <<<"$input")
-host=$(jq -r .location.hostname <<<"$input")
 
 if [[ $action == "app-info" ]]; then
-    printf '{"url":"%s"}' "${protocol}//${host}/zammad"
+    if [[ $(/sbin/e-smith/config getprop zammad status) == "enabled" ]]; then
+        vhost=$(/sbin/e-smith/config getprop zammad VirtualHost)
+        printf '{"url":"%s"}' "https://${vhost}"
+    else
+        printf '{}'
+    fi
 fi
