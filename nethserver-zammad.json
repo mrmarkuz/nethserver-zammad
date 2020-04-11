@@ -1,8 +1,8 @@
 {
   "id": "nethserver-zammad",
   "name": "Zammad",
-  "summary": "Provides real-time monitoring",
-  "description": "Provides real-time monitoring",
+  "summary": "Nethserver integration of Zammad web app",
+  "description": "Provides user support/ticketing",
   "url": "",
   "provides": ["nethserver-zammad"],
   "release": {
