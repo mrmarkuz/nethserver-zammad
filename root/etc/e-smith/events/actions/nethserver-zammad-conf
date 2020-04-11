@@ -31,11 +31,9 @@ fi
 # Setup elasticsearch index - thanks to CptCharlesG
 
 if [[ -f "/usr/bin/zammad" ]]; then
-   su zammad
-   zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
-   zammad run rails r "Setting.set('es_index', Socket.gethostname.downcase + '_zammad')"
-   zammad run rails r "Setting.set('es_attachment_ignore', [ '.png', '.jpg', '.jpeg', '.mpeg', '.mpg', '.mov', '.bin', '.exe', '.box', '.mbox' ] )"
-   zammad run rails r "Setting.set('es_attachment_max_size_in_mb', 50)"
-   zammad run rake searchindex:rebuild
-   exit
+   sudo -u zammad zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
+   sudo -u zammad zammad run rails r "Setting.set('es_index', Socket.gethostname.downcase + '_zammad')"
+   sudo -u zammad zammad run rails r "Setting.set('es_attachment_ignore', [ '.png', '.jpg', '.jpeg', '.mpeg', '.mpg', '.mov', '.bin', '.exe', '.box', '.mbox' ] )"
+   sudo -u zammad zammad run rails r "Setting.set('es_attachment_max_size_in_mb', 50)"
+   sudo -u zammad zammad run rake searchindex:rebuild
 fi
