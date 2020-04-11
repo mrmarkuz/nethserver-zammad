@@ -27,3 +27,15 @@ fi
 # if zammad already installed let it use port 3001 instead of 3000 to not use same port as ntopng
 
 [ -f "/usr/bin/zammad" ] && zammad config:set ZAMMAD_RAILS_PORT=3001
+
+# Setup elasticsearch index - thanks to CptCharlesG
+
+if [[ -f "/usr/bin/zammad" ]]; then
+   su zammad
+   zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
+   zammad run rails r "Setting.set('es_index', Socket.gethostname.downcase + '_zammad')"
+   zammad run rails r "Setting.set('es_attachment_ignore', [ '.png', '.jpg', '.jpeg', '.mpeg', '.mpg', '.mov', '.bin', '.exe', '.box', '.mbox' ] )"
+   zammad run rails r "Setting.set('es_attachment_max_size_in_mb', 50)"
+   zammad run rake searchindex:rebuild
+   exit
+fi

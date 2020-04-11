@@ -1,0 +1,7 @@
+#
+# nsapi_nethserver_zammad
+#
+Cmnd_Alias NSAPI_NETHSERVER_ZAMMAD = \
+    /usr/libexec/nethserver/api/nethserver-zammad/read
+
+Defaults!NSAPI_NETHSERVER_ZAMMAD !requiretty
