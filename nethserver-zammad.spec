@@ -1,16 +1,16 @@
 Summary: NethServer zammad integration
 Name: nethserver-zammad
 Version: 1.0.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: GPL
-URL: %{url_prefix}/%{name} 
+URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
 BuildArch: noarch
 
-Requires: nethserver-nginx, nethserver-postgresql, java-1.8.0-openjdk, elasticsearch
+Requires: nethserver-nginx, nethserver-postgresql, java-1.8.0-openjdk, elasticsearch, zammad
 
 BuildRequires: perl
-BuildRequires: nethserver-devtools 
+BuildRequires: nethserver-devtools
 
 %description
 NethServer Zammad integration
@@ -50,6 +50,9 @@ cp -a ui/* %{buildroot}/usr/share/cockpit/%{name}/
 %dir %{_nseventsdir}/%{name}-update
 
 %changelog
+* Tue Mar 02 2021 Markus Neuberger <info@markusneuberger.at> - 0.0.1-7
+- Add zammad requirement
+
 * Sat Apr 11 2020 Markus Neuberger <info@markusneuberger.at> - 0.0.1-6
 - Add cockpit application
 - Add elasticsearch setup
