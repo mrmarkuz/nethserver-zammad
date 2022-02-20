@@ -1,7 +1,7 @@
 Summary: NethServer zammad integration
 Name: nethserver-zammad
 Version: 1.0.0
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
