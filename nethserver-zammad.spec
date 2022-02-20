@@ -50,6 +50,9 @@ cp -a ui/* %{buildroot}/usr/share/cockpit/%{name}/
 %dir %{_nseventsdir}/%{name}-update
 
 %changelog
+* Sun Feb 20 2022 Markus Neuberger <info@markusneuberger.at> - 0.0.1-8
+- Limit to version 4 - the last native installable version - thanks to pike
+
 * Tue Mar 02 2021 Markus Neuberger <info@markusneuberger.at> - 0.0.1-7
 - Add zammad requirement
 
